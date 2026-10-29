@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atenflux | Agendamento e atendimento automático no WhatsApp</title>
+  <meta name="description" content="A Atenflux automatiza o atendimento e o agendamento do seu negócio pelo WhatsApp, com chatbot, confirmações e lembretes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <header class="header" id="topo">
+    <div class="container nav">
+      <a href="#topo" class="logo" aria-label="Atenflux">
+        <span class="logo-mark"></span>Atenflux
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#planos">Planos</a>
+        <a href="#demo">Demonstração</a>
+        <a href="#contato" class="btn btn-small">Agendar conversa</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="tag">Atendimento + agendamento no WhatsApp</span>
+          <h1>Seus clientes agendam sozinhos.<br><span class="grad">Você só atende.</span></h1>
+          <p>A Atenflux responde, agenda, confirma e lembra seus clientes automaticamente pelo WhatsApp, 24 horas por dia, sem você largar o que está fazendo.</p>
+          <div class="hero-cta">
+            <a href="#contato" class="btn">Quero conhecer</a>
+            <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="phone">
+            <div class="phone-top">
+              <span class="avatar">A</span>
+              <div><strong>Atenflux</strong><small>online agora</small></div>
+            </div>
+            <div class="chat" id="heroChat">
+              <div class="msg in">Olá! 👋 Quer agendar um horário?</div>
+              <div class="msg out">Quero sim, para quinta-feira</div>
+              <div class="msg in">Tenho horário as 10h, 14h30 e 16h. Qual prefere?</div>
+              <div class="msg out">14h30</div>
+              <div class="msg in ok">✅ Agendado para quinta, 14h30. Enviaremos um lembrete antes!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- sessão como funciona  -->
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tag">Simples de usar</span>
+          <h2>Como funciona</h2>
+          <p>Em três passos, o atendimento do seu negócio passa a rodar sozinho.</p>
+        </div>
+        <div class="steps">
+          <article class="card step reveal">
+            <span class="num">1</span>
+            <h3>O cliente chama no WhatsApp</h3>
+            <p>O chatbot responde na hora, tira dúvidas comuns e apresenta os serviços.</p>
+          </article>
+          <article class="card step reveal">
+            <span class="num">2</span>
+            <h3>Escolhe o melhor horário</h3>
+            <p>Ele vê só os horários livres e agenda sem troca de mensagens infinita.</p>
+          </article>
+          <article class="card step reveal">
+            <span class="num">3</span>
+            <h3>Confirmação e lembrete</h3>
+            <p>A Atenflux confirma o agendamento e avisa o cliente antes do horário.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSOS -->
+    <section class="section alt" id="recursos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tag">Recursos</span>
+          <h2>Tudo para organizar seu atendimento</h2>
+        </div>
+        <div class="features">
+          <article class="card feature reveal">
+            <div class="icon">💬</div>
+            <h3>Chatbot no WhatsApp</h3>
+            <p>Respostas automáticas e conversas naturais, no canal que seus clientes já usam.</p>
+          </article>
+          <article class="card feature reveal">
+            <div class="icon">📅</div>
+            <h3>Agenda inteligente</h3>
+            <p>Regras de horário e controle de conflitos, para nunca marcar duas pessoas no mesmo horário.</p>
+          </article>
+          <article class="card feature reveal">
+            <div class="icon">🔔</div>
+            <h3>Lembretes automáticos</h3>
+            <p>Menos faltas e mais horários aproveitados, com avisos enviados no momento certo.</p>
+          </article>
+          <article class="card feature reveal">
+            <div class="icon">📊</div>
+            <h3>Painel de controle</h3>
+            <p>Veja agendamentos, clientes e o dia da sua equipe em um só lugar.</p>
+          </article>
+          <article class="card feature reveal">
+            <div class="icon">⏱️</div>
+            <h3>Atendimento 24h</h3>
+            <p>Seu negócio responde mesmo fora do expediente, nos fins de semana e feriados.</p>
+          </article>
+          <article class="card feature reveal">
+            <div class="icon">🧩</div>
+            <h3>Feito sob medida</h3>
+            <p>Adaptamos fluxos, mensagens e serviços ao jeito do seu negócio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <!-- ATENÇÃO: os valores e itens abaixo são EXEMPLOS. Ajuste para os preços e condições reais da Atenflux. -->
+    <section class="section" id="planos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tag">Planos</span>
+          <h2>Escolha o plano ideal para o seu negócio</h2>
+          <p>Comece com o que você precisa hoje e evolua conforme o atendimento cresce.</p>
+        </div>
+        <div class="plans">
+
+          <article class="card plan reveal">
+            <h3>Chatbot</h3>
+            <p class="plan-for">Para começar a atender e agendar no automático.</p>
+            <div class="price">
+              <span class="price-label">Setup (pagamento único)</span>
+              <div class="price-main"><span class="cur">R$</span><strong>1.200</strong></div>
+              <div class="price-month">+ <strong>R$ 197</strong>/mês de manutenção</div>
+            </div>
+            <ul class="plan-list">
+              <li>Chatbot no WhatsApp com respostas automáticas</li>
+              <li>Agendamento direto pela conversa</li>
+              <li>Confirmação e lembretes automáticos</li>
+              <li>Banco de dados com clientes e agendamentos</li>
+              <li>Suporte por e-mail</li>
+            </ul>
+            <a href="#contato" class="btn btn-ghost" data-plan="Chatbot">Quero este plano</a>
+          </article>
+
+          <article class="card plan featured reveal">
+            <span class="badge">Mais escolhido</span>
+            <h3>Chatbot + Site</h3>
+            <p class="plan-for">Para ter presença online e atendimento automático juntos.</p>
+            <div class="price">
+              <span class="price-label">Setup (pagamento único)</span>
+              <div class="price-main"><span class="cur">R$</span><strong>2.800</strong></div>
+              <div class="price-month">+ <strong>R$ 297</strong>/mês de manutenção</div>
+            </div>
+            <ul class="plan-list">
+              <li>Tudo do plano Chatbot</li>
+              <li>Site profissional com a cara da sua marca</li>
+              <li>Formulário de agendamento no site, ligado ao banco de dados</li>
+              <li>Painel para acompanhar agendamentos e clientes</li>
+              <li>Suporte prioritário pelo WhatsApp</li>
+            </ul>
+            <a href="#contato" class="btn" data-plan="Chatbot + Site">Quero este plano</a>
+          </article>
+
+          <article class="card plan reveal">
+            <h3>Completo</h3>
+            <p class="plan-for">Site, chatbot e app para uma experiência de ponta a ponta.</p>
+            <div class="price">
+              <span class="price-label">Setup (pagamento único)</span>
+              <div class="price-main"><span class="cur">a partir de R$</span><strong>6.000</strong></div>
+              <div class="price-month">+ <strong>R$ 497</strong>/mês de manutenção</div>
+            </div>
+            <ul class="plan-list">
+              <li>Tudo do plano Chatbot + Site</li>
+              <li>App para seus clientes agendarem e acompanharem horários</li>
+              <li>Fluxos e integrações sob medida</li>
+              <li>Relatórios completos</li>
+              <li>Acompanhamento dedicado</li>
+            </ul>
+            <a href="#contato" class="btn btn-ghost" data-plan="Completo">Falar com a equipe</a>
+          </article>
+
+        </div>
+        <!-- Ajuste o que a mensalidade cobre (hospedagem, suporte, ajustes etc.) conforme a oferta real. -->
+        <p class="plans-note reveal">O <strong>setup</strong> cobre a criação e a configuração, e é pago uma única vez. A <strong>mensalidade</strong> cobre manutenção, suporte e ajustes.</p>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section" id="demo">
+      <div class="container demo-grid">
+        <div class="reveal">
+          <span class="tag">Experimente</span>
+          <h2>Veja uma conversa de agendamento</h2>
+          <p class="lead">Clique nas opções ao lado para simular como seu cliente agenda em poucos toques.</p>
+        </div>
+        <div class="phone reveal">
+          <div class="phone-top">
+            <span class="avatar">A</span>
+            <div><strong>Atenflux</strong><small>demonstração</small></div>
+          </div>
+          <div class="chat" id="demoChat" aria-live="polite"></div>
+          <div class="options" id="demoOptions"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section cta-section" id="contato">
+      <div class="container">
+        <div class="booking reveal">
+          <div class="booking-info">
+            <h2>Agende uma conversa</h2>
+            <p>Uma reunião de apresentação para entender o seu negócio e mostrar a Atenflux funcionando na prática.</p>
+            <!-- Ajuste duração e horários de atendimento conforme a realidade da Atenflux. -->
+            <ul class="info-list">
+              <li><strong>Duração</strong><span>cerca de 30 minutos, por vídeo ou WhatsApp</span></li>
+              <li><strong>Atendimento</strong><span>segunda a sexta, das 9h às 18h</span></li>
+              <li><strong>Confirmação</strong><span>retornamos pelo WhatsApp para confirmar o horário escolhido</span></li>
+              <li><strong>Escolha seu plano</strong><span>se já souber qual interessa, selecione ao lado; se não, a gente ajuda</span></li>
+            </ul>
+          </div>
+
+          <form id="contactForm" class="form" novalidate>
+            <div class="row">
+              <label>Seu nome
+                <input type="text" name="nome" placeholder="Como podemos te chamar?" required>
+              </label>
+              <label>WhatsApp
+                <input type="tel" name="whatsapp" placeholder="(41) 99999-9999" inputmode="tel" required>
+              </label>
+            </div>
+            <div class="row">
+              <label>E-mail (opcional)
+                <input type="email" name="email" placeholder="voce@empresa.com">
+              </label>
+              <label>Tipo de negócio
+                <input type="text" name="negocio" placeholder="Ex.: clínica, salão, estúdio...">
+              </label>
+            </div>
+            <label>Plano de interesse
+              <select name="plano">
+                <option value="Ainda não sei">Ainda não sei</option>
+                <option value="Chatbot">Chatbot</option>
+                <option value="Chatbot + Site">Chatbot + Site</option>
+                <option value="Completo">Completo (Site + Chatbot + App)</option>
+              </select>
+            </label>
+            <div class="row">
+              <label>Dia preferido
+                <input type="date" name="data" required>
+              </label>
+              <label>Horário
+                <select name="horario" required>
+                  <option value="">Escolha</option>
+                  <option>09:00</option><option>10:00</option><option>11:00</option>
+                  <option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
+                </select>
+              </label>
+            </div>
+            <label>Mensagem (opcional)
+              <textarea name="mensagem" rows="3" placeholder="O que você gostaria de automatizar?"></textarea>
+            </label>
+            <button type="submit" class="btn">Solicitar agendamento</button>
+            <small class="form-status" id="formStatus" role="status" aria-live="polite"></small>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <a href="#topo" class="logo"><span class="logo-mark"></span>Atenflux</a>
+      <p>© <span id="ano"></span> Atenflux. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

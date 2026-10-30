@@ -1,19 +1,3 @@
--- =====================================================================
--- Banco de dados da Atenflux (Supabase / Postgres)
---
--- PASSO A PASSO
--- 1. Crie uma conta gratuita em https://supabase.com e um novo projeto.
--- 2. No menu lateral, abra "SQL Editor", cole TODO este arquivo e clique em Run.
--- 3. Em "Project Settings > API", copie:
---      - Project URL        -> SUPABASE_URL no script.js
---      - anon public key    -> SUPABASE_ANON_KEY no script.js
--- 4. Para VER quem enviou: menu "Table Editor" > tabela "agendamentos".
---    Lá aparece como planilha; você pode filtrar, ordenar, editar o
---    "status" e exportar em CSV.
--- 5. (Opcional) Para receber aviso por e-mail a cada pedido, configure
---    também a WEB3FORMS_KEY (Web3Forms) no script.js.
--- =====================================================================
-
 create table if not exists public.agendamentos (
   id              bigint generated always as identity primary key,
   criado_em       timestamptz not null default now(),
@@ -45,8 +29,8 @@ create policy "site pode inserir pedidos"
 grant usage on schema public to anon;
 grant insert on public.agendamentos to anon;
 
--- Você (logada no painel do Supabase) enxerga tudo pelo Table Editor.
+-- Cria uma table no banco de dados para armazenar os agendamentos, com campos como id, criado_em, nome, whatsapp, email, negocio, plano, dia_preferido, horario, mensagem e status. Define restrições de integridade para cada campo.
 -- Nenhuma policy de SELECT é criada para o público, de propósito:
--- os dados dos clientes ficam visíveis só para você.
+-- os dados dos clientes ficam visíveis só para mim.
 
 create index if not exists agendamentos_criado_em_idx on public.agendamentos (criado_em desc);

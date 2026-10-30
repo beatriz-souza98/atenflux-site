@@ -1,23 +1,12 @@
-// ===== Configuração =====
-// Troque pelo número real da Atenflux (formato internacional, só dígitos: 55 + DDD + número)
+//Configuração do site
 const WHATSAPP_NUMBER = "5541988759342";
 
-// ---- Para onde vão os pedidos de agendamento ----
-// E-mail (Web3Forms): cole aqui a "Access Key" da sua conta em https://web3forms.com.
-// Cada formulário enviado chega no e-mail da Atenflux cadastrado lá.
-// A chave é pública por natureza (fica visível no site) e só serve para enviar para o seu e-mail.
 const WEB3FORMS_KEY = "64f49236-2e85-4c0d-acab-4f7ec4b5adda";
 
-// Se o e-mail e o banco estiverem vazios, o formulário abre o WhatsApp com a mensagem pronta.
-
-// Banco de dados (Supabase). Veja o passo a passo no arquivo supabase.sql.
-// Cole aqui o "Project URL" e a chave "anon public" do seu projeto Supabase.
-// A chave anon é pública por natureza; a segurança vem das regras do banco (RLS) criadas no supabase.sql,
-// que permitem apenas INSERIR pedidos, nunca ler os dados de outras pessoas.
 const SUPABASE_URL = "https://xbhjpmitdkzuxtfewhsk.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_m4iGTYym53XyhUSOu9GLKg_PSZHiN2V";
 
-// ===== Menu mobile =====
+//Menu mobile
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
 
@@ -32,10 +21,10 @@ menu.querySelectorAll("a").forEach((link) =>
   })
 );
 
-// ===== Ano no rodapé =====
+//Ano no rodapé
 document.getElementById("ano").textContent = new Date().getFullYear();
 
-// ===== Animação de entrada ao rolar =====
+//Animação de entrada ao rolar
 const reveals = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver(
@@ -54,7 +43,7 @@ if ("IntersectionObserver" in window) {
   reveals.forEach((el) => el.classList.add("visible"));
 }
 
-// ===== Conversa animada do hero =====
+//Conversa animada do hero
 const heroMsgs = document.querySelectorAll("#heroChat .msg");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 heroMsgs.forEach((msg, i) => {
@@ -65,7 +54,7 @@ heroMsgs.forEach((msg, i) => {
   }, 600 + i * 900);
 });
 
-// ===== Demonstração interativa do chatbot =====
+//Demonstração interativa do chatbot
 const demoChat = document.getElementById("demoChat");
 const demoOptions = document.getElementById("demoOptions");
 
@@ -134,7 +123,7 @@ function showStep(key) {
 
 showStep("start");
 
-// ===== Planos -> pré-seleciona no formulário =====
+//Planos
 const form = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
@@ -144,8 +133,7 @@ document.querySelectorAll("[data-plan]").forEach((el) =>
   })
 );
 
-// ===== Agendamento =====
-// O cliente escolhe o dia da semana e o horário de preferência; a confirmação é feita depois, pelo WhatsApp.
+//Agendamento
 const DIAS_VALIDOS = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"];
 
 function setStatus(msg, type) {
@@ -165,7 +153,7 @@ form.addEventListener("submit", async (e) => {
   const v = Object.fromEntries(new FormData(form).entries());
   Object.keys(v).forEach((k) => (v[k] = String(v[k]).trim()));
 
-  // Validação
+  //Validação
   if (!v.nome) return erro("Por favor, informe seu nome.", "nome");
   if (v.whatsapp.replace(/\D/g, "").length < 10) return erro("Informe um WhatsApp válido, com DDD.", "whatsapp");
   if (v.email && !/^\S+@\S+\.\S+$/.test(v.email)) return erro("Esse e-mail parece inválido.", "email");
@@ -182,7 +170,7 @@ form.addEventListener("submit", async (e) => {
   if (v.negocio) texto += `\nNegócio: ${v.negocio}`;
   if (v.mensagem) texto += `\n\n${v.mensagem}`;
 
-  // Nada configurado: abre o WhatsApp com a mensagem pronta
+  //Nada configurado: abre o WhatsApp com a mensagem pronta
   const temBanco = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
   const temEmail = Boolean(WEB3FORMS_KEY);
   if (!temBanco && !temEmail) {
@@ -195,7 +183,7 @@ form.addEventListener("submit", async (e) => {
   btn.disabled = true;
   setStatus("Enviando...", "");
 
-  // 1) Salva no banco de dados
+  //Salva no banco de dados
   const salvarNoBanco = () =>
     fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/agendamentos`, {
       method: "POST",
@@ -222,7 +210,7 @@ form.addEventListener("submit", async (e) => {
       }
     });
 
-  // 2) Avisa por e-mail (Web3Forms)
+  //Avisa por e-mail (Web3Forms)
   const avisarPorEmail = () =>
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -252,14 +240,14 @@ form.addEventListener("submit", async (e) => {
   const resultados = await Promise.allSettled(tarefas);
   btn.disabled = false;
 
-  // Falhas parciais (ex.: e-mail ok mas banco falhou) não podem passar em branco
+  //Falhas parciais (ex.: e-mail ok mas banco falhou)
   const falhas = resultados
     .map((r, i) => ({ r, nome: nomes[i] }))
     .filter((x) => x.r.status === "rejected")
     .map((x) => `${x.nome}: ${(x.r.reason && x.r.reason.message) || x.r.reason}`);
   if (falhas.length) console.error("Falha parcial no envio:", falhas);
 
-  // Basta um dos dois ter funcionado para o pedido não se perder
+  //Basta um dos dois ter funcionado para o pedido não se perder
   if (resultados.some((r) => r.status === "fulfilled")) {
     const aviso = document.createElement("span");
     aviso.append("Pedido enviado! Entraremos em contato para confirmar. ");
@@ -269,11 +257,11 @@ form.addEventListener("submit", async (e) => {
     link.rel = "noopener";
     link.textContent = "Quer adiantar pelo WhatsApp?";
     aviso.appendChild(link);
-    // Falhas parciais ficam só no console (F12), o visitante não vê mensagem técnica.
+    //Falhas parciais ficam só no console (F12), o visitante não vê mensagem técnica.
     setStatus(aviso, "ok");
     form.reset();
   } else {
-    // Mostra o motivo real na tela (e no console) para facilitar achar o problema
+    //Mostra o motivo real na tela (e no console) para facilitar achar o problema
     const motivos = resultados.map((r) => (r.reason && r.reason.message) || String(r.reason)).join(" | ");
     console.error("Falha no envio:", motivos);
     setStatus("Não conseguimos enviar agora. Abrindo o WhatsApp para você.", "error");

@@ -1,20 +1,15 @@
-// ===== Configuração =====
-// Troque pelo número real da Atenflux (formato internacional, só dígitos: 55 + DDD + número)
-const WHATSAPP_NUMBER = "5541999999999";
+// Configuração 
+const WHATSAPP_NUMBER = "5541988759342";
+const WEB3FORMS_KEY = "64f49236-2e85-4c0d-acab-4f7ec4b5adda";
 
-// Para onde vão os pedidos de agendamento (e-mail).
-// 1) Crie um formulário gratuito em https://formspree.io com o e-mail da Atenflux.
-// 2) Cole aqui o endereço que ele fornecer, no formato "https://formspree.io/f/xxxxxxxx".
-// Enquanto estiver vazio, o formulário abre o WhatsApp com a mensagem pronta.
-const FORM_ENDPOINT = "";
+// Se o e-mail e o banco estiverem vazios, o formulário abre o WhatsApp com a mensagem pronta.
 
 // Banco de dados (Supabase). Veja o passo a passo no arquivo supabase.sql.
 // Cole aqui o "Project URL" e a chave "anon public" do seu projeto Supabase.
 // A chave anon é pública por natureza; a segurança vem das regras do banco (RLS) criadas no supabase.sql,
 // que permitem apenas INSERIR pedidos, nunca ler os dados de outras pessoas.
-const SUPABASE_URL = "";      // ex.: "https://abcdxyz.supabase.co"
-const SUPABASE_ANON_KEY = ""; // ex.: "eyJhbGciOi..."
-
+const SUPABASE_URL = "https://xbhjpmitdkzuxtfewhsk.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_m4iGTYym53XyhUSOu9GLKg_PSZHiN2V";
 // ===== Menu mobile =====
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
@@ -194,7 +189,7 @@ form.addEventListener("submit", async (e) => {
 
   // Nada configurado: abre o WhatsApp com a mensagem pronta
   const temBanco = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
-  const temEmail = Boolean(FORM_ENDPOINT);
+  const temEmail = Boolean(WEB3FORMS_KEY);
   if (!temBanco && !temEmail) {
     abrirWhatsApp(texto);
     setStatus("Abrindo o WhatsApp com seu pedido pronto. É só enviar!", "ok");
@@ -229,25 +224,27 @@ form.addEventListener("submit", async (e) => {
       if (!r.ok) throw new Error("banco");
     });
 
-  // 2) Avisa por e-mail
+  // 2) Avisa por e-mail (Web3Forms)
   const avisarPorEmail = () =>
-    fetch(FORM_ENDPOINT, {
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        _subject: `Novo pedido de agendamento: ${v.nome} (${v.plano})`,
-        _replyto: v.email || undefined,
+        access_key: WEB3FORMS_KEY,
+        subject: `Novo pedido de agendamento: ${v.nome} (${v.plano})`,
+        from_name: "Site Atenflux",
         nome: v.nome,
         whatsapp: v.whatsapp,
-        email: v.email,
+        email: v.email || undefined, // se preenchido, vira o "responder para" do e-mail
         negocio: v.negocio,
         plano: v.plano,
         dia: dataBR,
         horario: v.horario,
         mensagem: v.mensagem,
       }),
-    }).then((r) => {
-      if (!r.ok) throw new Error("email");
+    }).then(async (r) => {
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || j.success === false) throw new Error("email");
     });
 
   const tarefas = [];
